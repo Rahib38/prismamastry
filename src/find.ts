@@ -8,22 +8,26 @@ const main = async () => {
 
   const findFirst = await prisma.post.findFirst({
     where: {
-      published: true
+      published: true,
     },
   });
-
 
   try {
     const findUnique = await prisma.post.findUnique({
       where: {
-        id: 100,  // উদাহরণ হিসেবে আইডি দিয়ে অনুসন্ধান
+        id: 24, // উদাহরণ হিসেবে আইডি দিয়ে অনুসন্ধান
       },
+      select:{
+        title:true,
+        content:true,
+        authorName:true
+      }
     });
     console.log(findUnique);
   } catch (error) {
-    console.error('কোনো রেকর্ড পাওয়া যায়নি:', error);
+    console.error("কোনো রেকর্ড পাওয়া যায়নি:", error);
   }
-//   console.log({ findUnique });
+  //   console.log({ findUnique });
 };
 
 main();
